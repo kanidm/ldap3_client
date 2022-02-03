@@ -1,0 +1,33 @@
+[package]
+name = "ldap3_client"
+version = "0.1.0"
+authors = ["William Brown <william@blackhats.net.au>"]
+edition = "2021"
+
+description = "LDAP Command Line Clients"
+repository = "https://github.com/kanidm/ldap3_client"
+readme = "README.md"
+keywords = ["ldap", "protocol", "authentication", "chaos"]
+categories = ["authentication"]
+license = "MPL-2.0"
+
+[lib]
+name = "ldapcli"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ldap"
+path = "src/ldap.rs"
+
+[[bin]]
+name = "cldap"
+path = "src/cldap.rs"
+
+
+[dependencies]
+
+ldap3_proto = "0.2"
+
+# ldap3_proto = { path = "../ldap3_proto" }
+
+
