@@ -11,6 +11,10 @@ keywords = ["ldap", "protocol", "authentication", "chaos"]
 categories = ["authentication"]
 license = "MPL-2.0"
 
+[features]
+default = ["strict"]
+strict = ["ldap3_proto/strict"]
+
 [lib]
 name = "ldapcli"
 path = "src/lib.rs"
@@ -23,10 +27,12 @@ path = "src/ldap.rs"
 name = "cldap"
 path = "src/cldap.rs"
 
+[[bin]]
+name = "ldap_debug"
+path = "src/ldap_debug.rs"
 
 [dependencies]
-# ldap3_proto = "0.2"
-ldap3_proto = { path = "../ldap3_proto" }
+ldap3_proto = { path = "../ldap3_proto", default-features = false }
 
 tracing = { version = "0.1", features = ["attributes"] }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
@@ -42,6 +48,7 @@ openssl = "0.10"
 
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+ron = "0.7.0"
 rpassword = "5.0"
 
 [build-dependencies]

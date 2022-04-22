@@ -8,6 +8,7 @@ use structopt::StructOpt;
 
 include!("src/ldap_opt.rs");
 include!("src/cldap_opt.rs");
+include!("src/ldap_debug_opt.rs");
 
 fn main() {
     let outdir = match env::var_os("OUT_DIR") {
@@ -27,11 +28,14 @@ fn main() {
         std::fs::create_dir(&comp_dir).expect("Unable to create completions dir");
     }
 
-    LdapOpt::clap().gen_completions("kanidmd", Shell::Bash, comp_dir.clone());
-    LdapOpt::clap().gen_completions("kanidmd", Shell::Zsh, comp_dir.clone());
-    CldapOpt::clap().gen_completions("kanidmd", Shell::Bash, comp_dir.clone());
-    CldapOpt::clap().gen_completions("kanidmd", Shell::Zsh, comp_dir);
+    LdapOpt::clap().gen_completions("ldap", Shell::Bash, comp_dir.clone());
+    LdapOpt::clap().gen_completions("ldap", Shell::Zsh, comp_dir.clone());
+    CldapOpt::clap().gen_completions("cldap", Shell::Bash, comp_dir.clone());
+    CldapOpt::clap().gen_completions("cldap", Shell::Zsh, comp_dir.clone());
+    LdapDebugOpt::clap().gen_completions("ldap_debug", Shell::Bash, comp_dir.clone());
+    LdapDebugOpt::clap().gen_completions("ldap_debug", Shell::Zsh, comp_dir);
 
     println!("cargo:rerun-if-changed=src/ldap_opt.rs");
     println!("cargo:rerun-if-changed=src/cldap_opt.rs");
+    println!("cargo:rerun-if-changed=src/ldap_debug_opt.rs");
 }

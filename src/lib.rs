@@ -20,6 +20,8 @@ use tokio_util::codec::{Framed, FramedRead, FramedWrite};
 use std::fmt;
 use url::Url;
 
+pub use ldap3_proto::proto;
+
 pub fn start_tracing(verbose: bool) {
     let fmt_layer = tracing_subscriber::fmt::layer().with_target(false);
     let filter_layer = EnvFilter::try_from_default_env()
